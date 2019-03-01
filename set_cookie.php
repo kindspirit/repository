@@ -37,12 +37,7 @@ function set_cookie($name, $value, $options = array()) {
 			}
 		}
 		if (is_numeric($options['expires'])) {
-			$options['expires'] = $options['expires']>2147483647 && explode('MSIE ', $_SERVER['USER_AGENT'].'MSIE 9', 2)[1]<9?
-				'Tue, 19 Jan 2038 03:14:07 GMT':// Old browsers don't support dates past Tue, 19 Jan 2038 03:14:07 GMT (2147483647 seconds)
-				substr(gmdate('r', $options['expires']), 0, -5).'GMT';// Convert to string.
-		}
-		elseif (strtotime($options['expires'])>2147483647 && explode('MSIE ', $_SERVER['USER_AGENT'].'MSIE 9', 2)[1]<9) {
-			$options['expires'] = 'Tue, 19 Jan 2038 03:14:07 GMT';
+			$options['expires'] = substr(gmdate('r', $options['expires']), 0, -5).'GMT';// Convert to string.
 		}
 	}
 
