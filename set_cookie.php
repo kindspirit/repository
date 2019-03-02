@@ -26,7 +26,7 @@ function set_cookie($name, $value, $options = array()) {
 	}
 	else {
 		if (isset($options['max-age'])) {
-			if (is_string($options['max-age'])) {// supports "20 years" instead of int
+			if (!is_numeric($options['max-age'])) {// supports "20 years" instead of int
 				$options['max-age'] = strtotime($options['max-age'])-$_SERVER['REQUEST_TIME'];
 			}
 			$options['expires'] = $options['max-age']+$_SERVER['REQUEST_TIME'];
