@@ -5,13 +5,16 @@
  * Flatten an array of arbitrarily nested arrays into a flat array
  * e.g. [[1,2,[3]],4].flatten(); will return [1,2,3,4]
  *
- * To prevent infinite recursion, this method will throw an error
- * if the array contains a circular reference.
+ * This method tries to create a unique key for each array that it
+ * finds so that it can quickly find circular references and throw
+ * an error to prevent infinite recursion.
  *
  * This method first counts all of the values in the source array
  * before initializing a new array of said size. This is purely for
  * better efficiency since it's always more efficient to initialize
  * an array with a predetermined size than repeatedly resize an array.
+ *
+ * 
  *
  */
 
@@ -27,6 +30,9 @@ Array.prototype.flatten = function() {
 				key = array.length+(array[0] && array[0].constructor===Array?
 					'-'+array[0].length:
 					':'+String(array[0])
+				)+(array[array.length-1] && array[array.length-1].constructor===Array?
+					'-'+array[array.length-1].length:
+					':'+String(array[array.length-1])
 				);
 				if (parents[key]) {// key collision
 					i = parents[key].length;// Start at end of array.
