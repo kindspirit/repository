@@ -1,4 +1,5 @@
-// new Cookies() creates an object containing cookies as key-value pairs.
+// new Cookies() creates an object containing site cookies as key-value pairs.
+// If you don't use new keyword, it adds cookies as properties to the window object
 function Cookies() {
 	var a, i, p;
 	if (typeof document.cookie=='string') {
